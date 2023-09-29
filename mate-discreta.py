@@ -4,19 +4,35 @@ import random
 import flet as ft
 
 def main(page: ft.Page):
-    page.horizontal_alignment = 'CENTER'
 
-    page.add(ft.Text(value="Simulador de enfrentamientos", size=30, text_align="CENTER"))
-    
+    page.fonts = {
+        "Pixels": "fonts/PixelifySans-VariableFont_wght.ttf",
+        "Ubuntu-Bold": "fonts/Ubuntu-Bold.ttf",
+        "GochiHand": "fonts/GochiHand-Regular.ttf"
+    }
+
+    page.theme = ft.Theme(font_family="Ubuntu-Bold")
+
     page.title = "Matematica Discreta (miniproyecto)"
-    # page.window_width=1000
-    # page.window_height=600
     page.window_max_width=1000
     page.window_max_height=700
+    page.bgcolor="#f1edd0"
+
+    page.horizontal_alignment = 'CENTER'
+
+    page.add(ft.Text(value="Simulador de enfrentamientos", size=30, text_align="CENTER", color="#55443d", weight="bold", font_family="GochiHand"))
+    
+    # page.window_width=1000
+    # page.window_height=600
+    
     # page.window_resizable=False
 
-    main_txt = ft.TextField(label="Ingrese los nombres de los ocho equipos...", text_align=ft.TextAlign.LEFT, width=600)
-    
+    main_txt = ft.TextField(label="Ingrese los nombres de los ocho equipos...", text_align=ft.TextAlign.LEFT, 
+                            width=600, border_color="#a0cab5", color="#55443d", 
+                            label_style=ft.TextStyle(weight="bold", color="#55443d"),
+                            text_style=ft.TextStyle(weight="bold", color="#55443d"))
+    txt_versus = ft.Text(value="VS", text_align=ft.TextAlign.CENTER, color="#000706", weight="bold", font_family="Pixels", size=25)
+
     DragableAux = []
 
     def drag_accept(e):
@@ -38,9 +54,9 @@ def main(page: ft.Page):
             content=ft.Container(
                 width=100,
                 height=35,
-                bgcolor=ft.colors.PINK_900,
+                bgcolor="#f38a8a",
                 border_radius=5,
-                content=ft.Text(txt, size=15),
+                content=ft.Text(txt, size=15, color="#000000", weight="bold"),
                 alignment=ft.alignment.center,
             ),
         ))
@@ -74,9 +90,22 @@ def main(page: ft.Page):
                         content=ft.Container(
                             width=100,
                             height=35,
-                            bgcolor=ft.colors.GREEN_900,
+                            bgcolor="#a0cab5",
                             border_radius=5,
-                            content=ft.Text("First", size=15),
+                            content=ft.Text("First", size=15, color="#55443d", weight="bold"),
+                            alignment=ft.alignment.center,
+                        ),
+                        on_accept=drag_accept,
+                    ),
+                    ft.Container(width=100, content=txt_versus),
+                    ft.DragTarget(
+                        group="number",
+                        content=ft.Container(
+                            width=100,
+                            height=35,
+                            bgcolor="#a0cab5",
+                            border_radius=5,
+                            content=ft.Text("Second", size=15, color="#55443d", weight="bold"),
                             alignment=ft.alignment.center,
                         ),
                         on_accept=drag_accept,
@@ -87,35 +116,22 @@ def main(page: ft.Page):
                         content=ft.Container(
                             width=100,
                             height=35,
-                            bgcolor=ft.colors.GREEN_900,
+                            bgcolor="#a0cab5",
                             border_radius=5,
-                            content=ft.Text("Second", size=15),
+                            content=ft.Text("Third", size=15, color="#55443d", weight="bold"),
                             alignment=ft.alignment.center,
                         ),
                         on_accept=drag_accept,
                     ),
-                    ft.Container(width=100),
+                    ft.Container(width=100, content=txt_versus),
                     ft.DragTarget(
                         group="number",
                         content=ft.Container(
                             width=100,
                             height=35,
-                            bgcolor=ft.colors.GREEN_900,
+                            bgcolor="#a0cab5",
                             border_radius=5,
-                            content=ft.Text("Third", size=15),
-                            alignment=ft.alignment.center,
-                        ),
-                        on_accept=drag_accept,
-                    ),
-                    ft.Container(width=100),
-                    ft.DragTarget(
-                        group="number",
-                        content=ft.Container(
-                            width=100,
-                            height=35,
-                            bgcolor=ft.colors.GREEN_900,
-                            border_radius=5,
-                            content=ft.Text("Fourth", size=15),
+                            content=ft.Text("Fourth", size=15, color="#55443d", weight="bold"),
                             alignment=ft.alignment.center,
                         ),
                         on_accept=drag_accept,
@@ -132,22 +148,22 @@ def main(page: ft.Page):
                         content=ft.Container(
                             width=100,
                             height=35,
-                            bgcolor=ft.colors.GREEN_900,
+                            bgcolor="#a0cab5",
                             border_radius=5,
-                            content=ft.Text("Finalist 1", size=15),
+                            content=ft.Text("Finalist", size=15, color="#55443d", weight="bold"),
                             alignment=ft.alignment.center,
                         ),
                         on_accept=drag_accept,
                     ),
-                    ft.Container(width=320),
+                    ft.Container(width=320, content=txt_versus),
                     ft.DragTarget(
                         group="number",
                         content=ft.Container(
                             width=100,
                             height=35,
-                            bgcolor=ft.colors.GREEN_900,
+                            bgcolor="#a0cab5",
                             border_radius=5,
-                            content=ft.Text("Finalist 2", size=15),
+                            content=ft.Text("Finalist", size=15, color="#55443d", weight="bold"),
                             alignment=ft.alignment.center,
                         ),
                         on_accept=drag_accept,
@@ -163,9 +179,9 @@ def main(page: ft.Page):
                         content=ft.Container(
                             width=100,
                             height=35,
-                            bgcolor=ft.colors.GREEN_900,
+                            bgcolor="#a0cab5",
                             border_radius=5,
-                            content=ft.Text("Winner", size=15),
+                            content=ft.Text("Winner", size=15, color="#55443d", weight="bold"),
                             alignment=ft.alignment.center,
                         ),
                         on_accept=drag_accept,
@@ -175,7 +191,7 @@ def main(page: ft.Page):
             )
         )
   
-    add_button = ft.ElevatedButton(text="Enviar", width=100, on_click=addDragrable)
+    add_button = ft.ElevatedButton(text="Enviar", width=100, on_click=addDragrable, bgcolor="#55443d", color="#f1edd0")
 
     page.add(
         ft.Container(height=15),
