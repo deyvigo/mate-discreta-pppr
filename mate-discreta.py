@@ -4,7 +4,8 @@ import random
 import flet as ft
 
 def main(page: ft.Page):
-
+    page.window_center()
+    
     page.fonts = {
         "Pixels": "fonts/PixelifySans-VariableFont_wght.ttf",
         "Ubuntu-Bold": "fonts/Ubuntu-Bold.ttf",
@@ -13,19 +14,20 @@ def main(page: ft.Page):
 
     page.theme = ft.Theme(font_family="Ubuntu-Bold")
 
+    
     page.title = "Matematica Discreta (miniproyecto)"
     page.window_max_width=1000
-    page.window_max_height=700
+    page.window_max_height=600
     page.bgcolor="#f1edd0"
 
     page.horizontal_alignment = 'CENTER'
 
     page.add(ft.Text(value="Simulador de enfrentamientos", size=30, text_align="CENTER", color="#55443d", weight="bold", font_family="GochiHand"))
     
-    # page.window_width=1000
-    # page.window_height=600
+    page.window_width=1000
+    page.window_height=600
     
-    # page.window_resizable=False
+    page.window_resizable=False
 
     main_txt = ft.TextField(label="Ingrese los nombres de los ocho equipos...", text_align=ft.TextAlign.LEFT, 
                             width=600, border_color="#a0cab5", color="#55443d", 
@@ -191,7 +193,7 @@ def main(page: ft.Page):
             )
         )
   
-    add_button = ft.ElevatedButton(text="Enviar", width=100, on_click=addDragrable, bgcolor="#55443d", color="#f1edd0")
+    add_button = ft.ElevatedButton(text="Enviar", width=120, on_click=addDragrable, bgcolor="#55443d", color="#f1edd0")
 
     page.add(
         ft.Container(height=15),
@@ -204,6 +206,5 @@ def main(page: ft.Page):
         ),
         ft.Container(height=35)
     )
-
 
 ft.app(target=main)
