@@ -35,6 +35,19 @@ def main(page: ft.Page):
                             text_style=ft.TextStyle(weight="bold", color="#55443d"))
     txt_versus = ft.Text(value="VS", text_align=ft.TextAlign.CENTER, color="#000706", weight="bold", font_family="Pixels", size=25)
 
+    # dlg_winner = ft.AlertDialog(
+    #     title=ft.Text(value="hola", text_align=ft.TextAlign.CENTER), on_dismiss=lambda e: print("")
+    # )
+
+    def open_dlg_winner(e):  #Para mostrar una ventana cuando se elija al ganador
+        src=page.get_control(e.src_id)
+        dlg_winner = ft.AlertDialog(
+            title=ft.Text("El ganador es: \n{}".format(src.content.content.value), text_align="CENTER"), actions_alignment=ft.MainAxisAlignment.CENTER
+        )
+        page.dialog = dlg_winner
+        dlg_winner.open = True
+        page.update()
+
     DragableAux = []
 
     def drag_accept(e):
@@ -186,7 +199,7 @@ def main(page: ft.Page):
                             content=ft.Text("Winner", size=15, color="#55443d", weight="bold"),
                             alignment=ft.alignment.center,
                         ),
-                        on_accept=drag_accept,
+                        on_accept=open_dlg_winner,
                     ),
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
